@@ -2,14 +2,14 @@
 class TTJoinBehavior extends ModelBehavior {
     private $lists = array();
 
-    private function __TTjoin( Model $model, $method, $arg=null) {
+    private function __TTjoin( Model $model, $joinKey, $arg=null) {
      
-        $methods = explode(".",$method);
+        $joinKeys = explode(".",$joinKey);
     
-         $joinModel = ClassRegistry::init($methods[0]);
-         $j = $joinModel->TTJoinLists;
-         $data = $j[$methods[1]];
-   
+         $joinModel = ClassRegistry::init($joinKeys[0]);
+         $j = $joinModel->TTjoinLists();
+         $data = $j[$joinKeys[1]];
+
          if($arg){
             $data = Hash::merge($data , $arg);
          }
@@ -21,13 +21,14 @@ class TTJoinBehavior extends ModelBehavior {
     }
 
     private function __TTRun(){
+        
         return $this->lists;
     }
 
 
-    public function TTJoin(Model $model,$method = array()){
+    public function TTJoin(Model $model,$arg = array()){
         $this->lists = [];
-        foreach($method as $k=>$v){
+        foreach($arg as $k=>$v){
             if(is_numeric($k)){
                 $this->__TTjoin($model,$v);
             }else{
@@ -45,50 +46,3 @@ class TTJoinBehavior extends ModelBehavior {
 
 
 }
-/*
-//post model
-case 01 : //quick use
-            array(
-             'joins' => $this->TTJoin(array('Comment.Post')),
-             );
-
-case 02 : 
-      array(
-             'joins' => $this->TTJoin(array('Comment.Post','modelName.TTKEY')),
-             );
-
-case 03 ://over write default value
-         array(
-             'joins' => $this->TTJoin(array(
-                            'Comment.Post'=>array(
-                                                'type'=>'INNER'
-                                                )
-                                        ),
-             );
-case 04 // no model join
-        'joins' => $this->TT(array('NoModel'=>array(
-                        'table' => 'comment',
-                        'alias' => 'Comment',
-                        'type' => 'LEFT',
-                        'conditions' => array(
-                            'Post.id = Comment.post_id',
-                        )
-                    ))
-
-
-
-//comment model
-// set default config
-
-     public $TTJoinLists = array(
-        'Post'=> array( 'table' => 'comment',
-                        'alias' => 'Comment',
-                        'type' => 'LEFT',
-                        'conditions' => array(
-                            'Post.id = Comment.post_id',
-                        )
-                    )
-     );
-     
-
-     */
