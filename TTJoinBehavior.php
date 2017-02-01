@@ -4,16 +4,24 @@ class TTJoinBehavior extends ModelBehavior {
 
     private function __TTjoin( Model $model, $joinKey, $arg=null) {
      
-        $joinKeys = explode(".",$joinKey);
+         $joinKeys = explode(".",$joinKey);
+         $modelName = $joinKeys[0];
+         $TTkey = $joinKeys[1];
+
     
-         $joinModel = ClassRegistry::init($joinKeys[0]);
+         $joinModel = ClassRegistry::init($modelName);
          $j = $joinModel->TTjoinLists();
-         $data = $j[$joinKeys[1]];
+         $data = $j[$TTkey];
         
         $database = ConnectionManager::getDataSource($joinModel->useDbConfig)->config['database'];
        
          $data['table'] = $database.'.'.$joinModel->useTable;
          $data['alias'] = $joinModel->alias;
+
+         if(isset($joinKeys[2])){
+             $data['type'] = $joinKeys[2];
+         }
+
          if($arg){
             $data = Hash::merge($data , $arg);
          }

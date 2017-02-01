@@ -11,6 +11,12 @@ case 02 :
              'joins' => $this->TTJoin(array('Comment.Post','modelName.TTKEY')),
              );
 
+case 01 : //quick over write default type
+            array(
+             'joins' => $this->TTJoin(array('Comment.Post.LEFT')),
+             );
+
+
 case 03 ://over write default value
          array(
              'joins' => $this->TTJoin(array(
