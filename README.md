@@ -1,4 +1,5 @@
 # cakephp_JoinTable_Behavior
+```
 //post model
 case 01 : //quick use
             array(
@@ -42,3 +43,4 @@ case 04 // no model join
                         )
                     )
      );
+```
