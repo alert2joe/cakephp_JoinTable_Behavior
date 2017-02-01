@@ -20,7 +20,7 @@ case 03 ://over write default value
                                         ),
              );
 case 04 // no model join
-        'joins' => $this->TT(array('NoModel'=>array(
+        'joins' => $this->TTJoin(array('NoModel'=>array(
                         'table' => 'comment',
                         'alias' => 'Comment',
                         'type' => 'LEFT',
@@ -28,19 +28,4 @@ case 04 // no model join
                             'Post.id = Comment.post_id',
                         )
                     ))
-
-
-
-//comment model
-// set default config
-
-    public $TTJoinLists = array(
-        'Post'=> array( 'table' => $this->$useDbConfig.'.'.$this->useTable,
-                        'alias' => $this->alias,
-                        'type' => 'LEFT',
-                        'conditions' => array(
-                            'Post.id = Comment.post_id',
-                        )
-                    )
-     );
 ```
