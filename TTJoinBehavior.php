@@ -8,9 +8,10 @@ class TTJoinBehavior extends ModelBehavior {
          $modelName = $joinKeys[0];
          $TTkey = $joinKeys[1];
 
-    
+         $callFunctionName = $this->settings[$model->alias]['callFunctionName'];
+         
          $joinModel = ClassRegistry::init($modelName);
-         $j = $joinModel->TTjoinLists();
+         $j = $joinModel->$callFunctionName();
          $data = $j[$TTkey];
         
         $database = ConnectionManager::getDataSource($joinModel->useDbConfig)->config['database'];
@@ -53,6 +54,17 @@ class TTJoinBehavior extends ModelBehavior {
         }
          return $this->__TTRun();
         
+    }
+
+    public function setup(Model $Model, $settings = array()) {
+    if (!isset($this->settings[$Model->alias])) {
+        $this->settings[$Model->alias] = array(
+            'callFunctionName' => 'TTjoinLists',
+         
+        );
+    }
+        $this->settings[$Model->alias] = array_merge(
+        $this->settings[$Model->alias], (array)$settings);
     }
 
 
