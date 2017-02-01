@@ -34,9 +34,9 @@ case 04 // no model join
 //comment model
 // set default config
 
-     public $TTJoinLists = array(
-        'Post'=> array( 'table' => 'comment',
-                        'alias' => 'Comment',
+    public $TTJoinLists = array(
+        'Post'=> array( 'table' => $this->$useDbConfig.'.'.$this->useTable,
+                        'alias' => $this->alias,
                         'type' => 'LEFT',
                         'conditions' => array(
                             'Post.id = Comment.post_id',
