@@ -9,7 +9,11 @@ class TTJoinBehavior extends ModelBehavior {
          $joinModel = ClassRegistry::init($joinKeys[0]);
          $j = $joinModel->TTjoinLists();
          $data = $j[$joinKeys[1]];
-
+        
+        $database = ConnectionManager::getDataSource($joinModel->useDbConfig)->config['database'];
+       
+         $data['table'] = $database.'.'.$joinModel->useTable;
+         $data['alias'] = $joinModel->alias;
          if($arg){
             $data = Hash::merge($data , $arg);
          }
