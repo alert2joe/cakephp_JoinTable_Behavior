@@ -1,9 +1,11 @@
 # cakephp_JoinTable_Behavior
 
-Usage
+##Usage
+
 Use inside your model
 ```
 public $actsAs = array('TTJoin');
+
 ```
 
 post.php 
