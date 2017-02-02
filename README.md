@@ -1,5 +1,12 @@
 # cakephp_JoinTable_Behavior
+
+Usage
+Use inside your model
 ```
+public $actsAs = array('TTJoin');
+```
+```
+
 //post model
 case 01 : //quick use
             array(
