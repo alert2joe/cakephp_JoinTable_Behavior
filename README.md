@@ -1,4 +1,6 @@
 # cakephp_JoinTable_Behavior
+##在MODEL 沒有設定 hasOne,hasMany... 的情況下，減少重復joins table，
+
 
 ##Usage
 
